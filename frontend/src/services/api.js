@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://localhost:5000/api'
+const API_BASE_URL = 'https://basal-ai-0w1p.onrender.com/api'
 
 export const submitApplication = async (applicationData) => {
   const response = await fetch(`${API_BASE_URL}/interview-requests`, {
