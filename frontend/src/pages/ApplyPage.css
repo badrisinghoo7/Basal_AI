@@ -48,7 +48,7 @@ input:focus, select:focus {
 }
 .btn {
   padding:1.2rem;
-  width: 60%;
+  /* width: 60%; */
   border: none;
   border-radius: 8px;
   background: #2563eb;
