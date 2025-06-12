@@ -7,28 +7,16 @@ import Signup from './pages/Signup'
 import Login from './pages/Login'
 
 function App() {
-  const token = localStorage.getItem('token')
-
   return (
     <div className="app">
       <Navigation />
       <main className="main-content">
         <Routes>
           <Route path="/" element={<Navigate to="/login" replace />} />
+          <Route path="/apply" element={<ApplyPage />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
-          <Route
-            path="/apply"
-            element={
-              token ? <ApplyPage /> : <Navigate to="/login" replace />
-            }
-          />
-          <Route
-            path="/recruiter"
-            element={
-              token ? <RecruiterPage /> : <Navigate to="/login" replace />
-            }
-          />
+          <Route path="/recruiter" element={<RecruiterPage />} />
         </Routes>
       </main>
     </div>
