@@ -15,15 +15,12 @@ const server = http.createServer(app);
 // Setup Socket.io
 const io = socketIo(server, {
   cors: {
-    origin: process.env.FRONTEND_URL || "http://localhost:3000",
-    methods: ["GET", "POST", "PUT"],
-    credentials: true
+    origin: "*"
   }
 });
 
 
 connectDB();
-
 
 app.use(cors({
   origin: "*"
@@ -45,15 +42,15 @@ app.get('/', (req, res) => {
 
 
 io.on('connection', (socket) => {
-  console.log('Client connected:', socket.id);
+  // console.log('Client connected:', socket.id);
 
-  socket.on('join-recruiter-room', () => {
+  socket.on('join-recruiter-room', (data) => {
     socket.join('recruiters');
-    console.log(`Socket ${socket.id} joined recruiters room`);
+    // console.log(`Socket ${socket.id} joined recruiters room data`, data);
   });
 
   socket.on('disconnect', () => {
-    console.log('Client disconnected:', socket.id);
+    // console.log('Client disconnected:', socket.id);
   });
 });
 

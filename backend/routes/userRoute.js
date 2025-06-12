@@ -39,7 +39,7 @@ UserRouter.post('/login', async (req, res) => {
     expiresIn: '1h',
   });
 
-  res.json({ message: 'Login successful', token });
+  res.json({ message: 'Login successful', token,role:user.role });
 });
 
 module.exports = UserRouter;

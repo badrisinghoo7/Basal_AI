@@ -12,13 +12,13 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.post('/', authMiddleware, async (req, res) => {
+router.post('/', async (req, res) => {
   try {
     const { name, email, jobTitle } = req.body;
     const newRequest = new InterViewModel({ name, email, jobTitle });
     const saved = await newRequest.save();
 
-    if (req.io) req.io.to('recruiters').emit('newInterViewModel', saved);
+    if (req.io) req.io.to('recruiters').emit('new-application', saved);
 
     res.status(201).json({ message: 'Request submitted', data: saved });
   } catch (err) {
@@ -26,7 +26,7 @@ router.post('/', authMiddleware, async (req, res) => {
   }
 });
 
-router.put('/:id/accept', authMiddleware, adminOnly, async (req, res) => {
+router.patch('/:id', async (req, res) => {
   try {
     const updated = await InterViewModel.findByIdAndUpdate(
       req.params.id,
@@ -44,7 +44,7 @@ router.put('/:id/accept', authMiddleware, adminOnly, async (req, res) => {
   }
 });
 
-router.get('/:id', authMiddleware, async (req, res) => {
+router.get('/:id', async (req, res) => {
   try {
     const data = await InterViewModel.findById(req.params.id);
     if (!data) return res.status(404).json({ message: 'Not found' });
